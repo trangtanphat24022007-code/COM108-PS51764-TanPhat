@@ -1,24 +1,15 @@
 #include <stdio.h>
 #include <math.h>
 
-// Hàm dọn dẹp bộ nhớ đệm bàn phím để tránh trôi lệnh scanf
-void xoaBoNhoDem() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
-// Bài 2: Tính học lực sinh viên
+// Hàm Bài 2: Tính học lực sinh viên
 void tinhHocLuc() {
     float diem;
-    printf("Nhap diem so sinh vien: ");
-    if (scanf("%f", &diem) != 1) {
-        printf("Diem so nhap vao khong hop le!\n");
-        xoaBoNhoDem();
-        return;
-    }
+    printf("\n--- CHUONG TRINH TINH HOC LUC SINH VIEN ---\n");
+    printf("Nhap diem cua sinh vien (0 - 10): ");
+    scanf("%f", &diem);
 
-    if (diem < 0.0 || diem > 10.0) {
-        printf("Diem so nhap vao khong hop le!\n");
+    if (diem < 0 || diem > 10) {
+        printf("Diem khong hop le! Vui long nhap trong khoang tu 0 den 10.\n");
     } else if (diem >= 9.0) {
         printf("Hoc luc: Xuat sac\n");
     } else if (diem >= 8.0) {
@@ -34,17 +25,19 @@ void tinhHocLuc() {
     }
 }
 
-// Bài 3: Giải phương trình bậc hai
+// Hàm Bài 3: Giải phương trình bậc hai (ax^2 + bx + c = 0)
 void giaiPTBacHai() {
     float a, b, c;
-    printf("Nhap a: ");
-    if (scanf("%f", &a) != 1) { xoaBoNhoDem(); return; }
-    printf("Nhap b: ");
-    if (scanf("%f", &b) != 1) { xoaBoNhoDem(); return; }
-    printf("Nhap c: ");
-    if (scanf("%f", &c) != 1) { xoaBoNhoDem(); return; }
+    printf("\n--- CHUONG TRINH GIAI PHUONG TRINH BAC HAI ---\n");
+    printf("Nhap he so a: ");
+    scanf("%f", &a);
+    printf("Nhap he so b: ");
+    scanf("%f", &b);
+    printf("Nhap he so c: ");
+    scanf("%f", &c);
 
     if (a == 0) {
+        // Phuong trinh tro thanh bx + c = 0
         if (b == 0) {
             if (c == 0) {
                 printf("Phuong trinh co vo so nghiem.\n");
@@ -52,7 +45,7 @@ void giaiPTBacHai() {
                 printf("Phuong trinh vo nghiem.\n");
             }
         } else {
-            printf("Phuong trinh co nghiem duy nhat: x = %.2f\n", -c / b);
+            printf("Phuong trinh bac nhat co nghiem x = %.2f\n", -c / b);
         }
     } else {
         float delta = b * b - 4 * a * c;
@@ -60,48 +53,47 @@ void giaiPTBacHai() {
             printf("Phuong trinh vo nghiem.\n");
         } else if (delta == 0) {
             float x = -b / (2 * a);
-            printf("Phuong trinh co nghiem kep: x = %.2f\n", x);
+            printf("Phuong trinh co nghiem kep x1 = x2 = %.2f\n", x);
         } else {
             float x1 = (-b + sqrt(delta)) / (2 * a);
             float x2 = (-b - sqrt(delta)) / (2 * a);
-            printf("Phuong trinh co 2 nghiem phan biet: x1 = %.2f, x2 = %.2f\n", x1, x2);
+            printf("Phuong trinh co 2 nghiem phan biet:\n");
+            printf("x1 = %.2f\n", x1);
+            printf("x2 = %.2f\n", x2);
         }
     }
 }
 
-// Bài 4: Tính tiền điện tiêu thụ hàng tháng
+// Hàm Bài 4: Tính tiền điện tiêu thụ
 void tinhTienDien() {
     float kwh, tienDien = 0;
-    printf("Nhap so kWh dien tieu thu: ");
-    if (scanf("%f", &kwh) != 1) {
-        printf("So kWh phai la so duong!\n");
-        xoaBoNhoDem();
-        return;
-    }
+    printf("\n--- CHUONG TRINH TINH TIEN DIEN TIEN THU ---\n");
+    printf("Nhap so kWh dien tieu thu hang thang: ");
+    scanf("%f", &kwh);
 
-    if (kwh <= 0) {
-        printf("So kWh phai la so duong!\n");
+    if (kwh < 0) {
+        printf("So kWh khong hop le!\n");
         return;
     }
 
     if (kwh <= 50) {
-        tienDien = kwh * 1.678;
+        tienDien = kwh * 1678;
     } else if (kwh <= 100) {
-        tienDien = 50 * 1.678 + (kwh - 50) * 1.734;
+        tienDien = 50 * 1678 + (kwh - 50) * 1734;
     } else if (kwh <= 200) {
-        tienDien = 50 * 1.678 + 50 * 1.734 + (kwh - 100) * 2.014;
+        tienDien = 50 * 1678 + 50 * 1734 + (kwh - 100) * 2014;
     } else if (kwh <= 300) {
-        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + (kwh - 200) * 2.536;
+        tienDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + (kwh - 200) * 2536;
     } else if (kwh <= 400) {
-        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + (kwh - 300) * 2.834;
+        tienDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + (kwh - 300) * 2834;
     } else {
-        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + 100 * 2.834 + (kwh - 400) * 2.927;
+        tienDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + 100 * 2834 + (kwh - 400) * 2927;
     }
 
-    printf("Tong tien dien phai tra: %.3f dong\n", tienDien);
+    printf("Tong tien dien phai tra: %.0f VND\n", tienDien);
 }
 
-// Bài 1: Xây dựng Menu chương trình
+// Hàm main điều khiển Menu (Bài 1)
 int main() {
     int luaChon;
 
@@ -112,12 +104,7 @@ int main() {
         printf("3. Tinh tien dien tieu thu\n");
         printf("0. Thoat chuong trinh\n");
         printf("Nhap lua chon cua ban: ");
-        
-        if (scanf("%d", &luaChon) != 1) {
-            printf("\nLua chon khong hop le! Vui long chon lai tu 0 den 3.\n");
-            xoaBoNhoDem();
-            continue;
-        }
+        scanf("%d", &luaChon);
 
         switch (luaChon) {
             case 1:
@@ -130,7 +117,7 @@ int main() {
                 tinhTienDien();
                 break;
             case 0:
-                printf("\nThoat chuong trinh thanh cong!\n");
+                printf("\nDa thoat chuong trinh. Tam biet!\n");
                 break;
             default:
                 printf("\nLua chon khong hop le! Vui long chon lai tu 0 den 3.\n");
